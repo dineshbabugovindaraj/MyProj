@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="en" data-ng-app="todoApp">
+<head>
+<title>TODO App</title>
+
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/app.css" rel="stylesheet" />
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/angular-ui-router.min.js"></script>
+<script src="js/lib/localforage.min.js"></script>
+<script src="js/lib/ngStorage.min.js"></script>
+<script src="js/app/app.js"></script>
+<script src="js/app/todoService.js"></script>
+<script src="js/app/todoController.js"></script>
+</head>
+<body ng-controller="todoController">
+
+	<div class="generic-container">
+
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<span class="lead">List of Tasks </span>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-hover table-list-search">
+						<thead>
+							<tr>
+								<th>Task</th>
+								<th>Description</th>
+								<th>Status</th>
+								<th width="100"></th>
+								<th width="100"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="u in getAllTasks()">
+								<td>{{u.task}}</td>
+								<td>{{u.desc}}</td>
+								<td>{{u.status}}</td>
+								<td><button type="button" ng-click="editTask(u.id)"
+										class="btn btn-success custom-width">Edit</button></td>
+								<td><button type="button" ng-click="removeTask(u.id)"
+										class="btn btn-danger custom-width">Remove</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<span class="lead">Task </span>
+			</div>
+			<div class="panel-body">
+				<div class="formcontainer">
+					<div class="alert alert-success" role="alert"
+						ng-if="successMessage">{{successMessage}}</div>
+					<div class="alert alert-danger" role="alert"
+						ng-if="errorMessage">{{errorMessage}}</div>
+					<form ng-submit="submit()" name="myForm"
+						class="form-horizontal">
+						<input type="hidden" ng-model="task.id" />
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="uname">Task</label>
+								<div class="col-md-7">
+									<input type="text" ng-model="task.task" id="uname"
+										class="username form-control input-sm"
+										placeholder="Enter Task" required ng-minlength="3" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="age">Description</label>
+								<div class="col-md-7">
+									<input type="text" ng-model="task.desc" id="age"
+										class="form-control input-sm"
+										placeholder="Enter Task Description." />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="status">Status</label>
+								<div class="col-md-7">
+									<select ng-model="task.status" name="status"
+										class="form-control input-sm">
+										<option value="Pending" selected="selected">Pending</option>
+										<option value="Completed">Completed</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-actions floatRight">
+								<input type="submit"
+									value="{{!task.id ? 'Add' : 'Update'}}"
+									class="btn btn-primary btn-sm"
+									ng-disabled="myForm.$invalid || myForm.$pristine">
+								<button type="button" ng-click="reset()"
+									class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Clear</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

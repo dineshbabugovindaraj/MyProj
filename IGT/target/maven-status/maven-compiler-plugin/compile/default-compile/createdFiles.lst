@@ -1,0 +1,9 @@
+com\igt\todo\repositories\TodoRepository.class
+com\igt\todo\configuration\JpaConfiguration.class
+com\igt\todo\model\TodoTask.class
+com\igt\todo\service\TodoService.class
+com\igt\todo\util\CustomErrorType.class
+com\igt\todo\filter\RestCorsFilter.class
+com\igt\todo\service\TodoServiceImpl.class
+com\igt\todo\TodoApplication.class
+com\igt\todo\rest\TodoModule.class
